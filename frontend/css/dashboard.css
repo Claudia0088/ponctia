@@ -1,0 +1,694 @@
+/* =====================================================
+   STRUCTURE GÉNÉRALE
+===================================================== */
+
+body {
+
+    margin: 0;
+
+    background: #f7f8fc;
+
+    color: #1f2937;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dashboard-header {
+
+    min-height: 72px;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    box-sizing: border-box;
+
+}
+
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+}
+
+
+.dashboard-header nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+}
+
+
+.dashboard-header nav a {
+
+    color: #4b5563;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.dashboard-header nav a:hover {
+
+    color: #111827;
+
+}
+
+
+/* =====================================================
+   BOUTON DÉCONNEXION
+===================================================== */
+
+.logout-button {
+
+    border: none;
+
+    background: #111827;
+
+    color: white;
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+.logout-button:hover {
+
+    opacity: 0.9;
+
+}
+
+
+/* =====================================================
+   CONTENEUR
+===================================================== */
+
+.dashboard-container {
+
+    width: min(1180px, 90%);
+
+    margin: 45px auto;
+
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.dashboard-section {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.04);
+
+}
+
+
+.section-label {
+
+    margin: 0 0 8px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: #6366f1;
+
+}
+
+
+.section-header h1,
+.section-header h2 {
+
+    margin: 0 0 8px;
+
+    color: #111827;
+
+}
+
+
+.section-header p:last-child {
+
+    margin-top: 0;
+
+    color: #6b7280;
+
+}
+
+
+/* =====================================================
+   STATISTIQUES
+===================================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 28px;
+
+}
+
+
+.stat-card {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.04);
+
+}
+
+
+.stat-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: #eef2ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+
+}
+
+
+.stat-card p {
+
+    margin: 0 0 5px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+}
+
+
+.stat-card h2 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.action-card {
+
+    display: flex;
+
+    gap: 18px;
+
+    padding: 22px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    transition: 0.2s;
+
+}
+
+
+.action-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.08);
+
+}
+
+
+.action-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 12px;
+
+    background: #eef2ff;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 23px;
+
+}
+
+
+.action-card h3 {
+
+    margin: 0 0 7px;
+
+}
+
+
+.action-card p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   PROFIL
+===================================================== */
+
+.profile-card {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.profile-item {
+
+    padding: 18px;
+
+    background: #f9fafb;
+
+    border-radius: 12px;
+
+}
+
+
+.profile-item span {
+
+    display: block;
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    margin-bottom: 6px;
+
+}
+
+
+.profile-item strong {
+
+    color: #111827;
+
+}
+
+
+/* =====================================================
+   FORMULAIRES
+===================================================== */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-size: 14px;
+
+    outline: none;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.1);
+
+}
+
+
+/* =====================================================
+   BOUTON PRINCIPAL
+===================================================== */
+
+.auth-button {
+
+    border: none;
+
+    background: #111827;
+
+    color: white;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+
+.auth-button:hover {
+
+    background: #374151;
+
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.success-message {
+
+    color: #15803d;
+
+    background: #f0fdf4;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+}
+
+
+.error-message {
+
+    color: #b91c1c;
+
+    background: #fef2f2;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+}
+
+
+/* =====================================================
+   TABLEAU HISTORIQUE
+===================================================== */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+thead {
+
+    background: #f9fafb;
+
+}
+
+
+th {
+
+    text-align: left;
+
+    padding: 15px;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    color: #6b7280;
+
+}
+
+
+td {
+
+    padding: 16px 15px;
+
+    border-top: 1px solid #e5e7eb;
+
+    font-size: 14px;
+
+}
+
+
+.status-badge {
+
+    display: inline-flex;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.status-badge.pending {
+
+    background: #fff7ed;
+
+    color: #c2410c;
+
+}
+
+
+.status-badge.justified {
+
+    background: #f0fdf4;
+
+    color: #15803d;
+
+}
+
+
+.status-badge.rejected {
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .dashboard-header {
+
+        padding: 15px 5%;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+
+    .dashboard-header nav {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .stats-grid,
+    .actions-grid,
+    .profile-card,
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .dashboard-container {
+
+        width: 94%;
+
+        margin: 25px auto;
+
+    }
+
+
+    .dashboard-section {
+
+        padding: 20px;
+
+    }
+
+}

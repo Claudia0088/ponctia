@@ -1,0 +1,414 @@
+/* =====================================================
+   PAGE AUTHENTIFICATION
+===================================================== */
+
+.auth-page {
+
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: #f7f8fc;
+
+}
+
+
+/* =====================================================
+   PARTIE GAUCHE
+===================================================== */
+
+.auth-presentation {
+
+    background: #111827;
+
+    color: white;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 70px;
+
+    box-sizing: border-box;
+
+}
+
+
+.presentation-content {
+
+    max-width: 560px;
+
+}
+
+
+.brand {
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    margin-bottom: 120px;
+
+    letter-spacing: -1px;
+
+}
+
+
+.presentation-label {
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+
+    opacity: 0.65;
+
+}
+
+
+.presentation-text h1 {
+
+    font-size: clamp(40px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin: 0 0 25px;
+
+}
+
+
+.presentation-text p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: #d1d5db;
+
+    max-width: 500px;
+
+}
+
+
+.presentation-features {
+
+    margin-top: 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    color: #e5e7eb;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   PARTIE DROITE
+===================================================== */
+
+.auth-section {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+}
+
+
+.auth-card {
+
+    width: min(430px, 100%);
+
+}
+
+
+.auth-header {
+
+    margin-bottom: 35px;
+
+}
+
+
+.section-label {
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: #6366f1;
+
+    margin-bottom: 12px;
+
+}
+
+
+.auth-header h1 {
+
+    font-size: 34px;
+
+    margin: 0 0 10px;
+
+    letter-spacing: -1px;
+
+}
+
+
+.auth-header > p:last-child {
+
+    color: #6b7280;
+
+    margin: 0;
+
+    line-height: 1.6;
+
+}
+
+
+.mobile-brand {
+
+    display: none;
+
+}
+
+
+/* =====================================================
+   FORMULAIRE
+===================================================== */
+
+.form-group {
+
+    margin-bottom: 22px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 15px 16px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    background: white;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+
+}
+
+
+.form-group input:focus {
+
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.10);
+
+}
+
+
+/* =====================================================
+   BOUTON
+===================================================== */
+
+.auth-button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.auth-button:hover {
+
+    background: #374151;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.success-message {
+
+    color: #15803d;
+
+    background: #f0fdf4;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.error-message {
+
+    color: #b91c1c;
+
+    background: #fef2f2;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.auth-footer {
+
+    margin-top: 28px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #6b7280;
+
+}
+
+
+.auth-footer p {
+
+    margin: 0 0 7px;
+
+}
+
+
+.auth-footer a {
+
+    color: #4f46e5;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+
+.auth-footer a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .auth-page {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .auth-presentation {
+
+        display: none;
+
+    }
+
+
+    .auth-section {
+
+        min-height: 100vh;
+
+        padding: 25px;
+
+    }
+
+
+    .mobile-brand {
+
+        display: block;
+
+        font-size: 25px;
+
+        font-weight: 800;
+
+        color: #111827;
+
+        margin-bottom: 40px;
+
+    }
+
+}

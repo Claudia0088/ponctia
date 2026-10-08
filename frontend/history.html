@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Historique | Ponctia</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/history.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="dashboard-header">
+
+    <div class="logo">
+        Ponctia
+    </div>
+
+    <nav>
+
+        <a href="dashboard.html">
+            Tableau de bord
+        </a>
+
+        <a href="lateness.html">
+            Déclarer un retard
+        </a>
+
+        <a
+            href="history.html"
+            class="active-link"
+        >
+            Historique
+        </a>
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+        >
+            Déconnexion
+        </button>
+
+    </nav>
+
+</header>
+
+
+<main class="dashboard-container">
+
+
+    <section class="history-header">
+
+        <div>
+
+            <p class="section-label">
+                SUIVI DE MON ASSIDUITÉ
+            </p>
+
+            <h1>
+                Mon historique
+            </h1>
+
+            <p>
+                Retrouve ici toutes tes déclarations de retard.
+            </p>
+
+        </div>
+
+
+        <a
+            href="lateness.html"
+            class="history-action"
+        >
+            + Déclarer un retard
+        </a>
+
+    </section>
+
+
+    <section class="history-toolbar">
+
+        <div>
+
+            <label for="statusFilter">
+                Filtrer par statut
+            </label>
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    Tous les retards
+                </option>
+
+                <option value="pending">
+                    En attente
+                </option>
+
+                <option value="justified">
+                    Justifiés
+                </option>
+
+                <option value="rejected">
+                    Refusés
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="historyCount"
+            class="history-count"
+        >
+            0 retard
+        </div>
+
+    </section>
+
+
+    <div id="historyMessage"></div>
+
+
+    <section class="history-card">
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Cours</th>
+                        <th>Enseignant</th>
+                        <th>Heure</th>
+                        <th>Durée</th>
+                        <th>Motif</th>
+                        <th>Statut</th>
+                        <th>Détails</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="latenessTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+const API_URL = "http://127.0.0.1:5000/api";
+
+const userData = localStorage.getItem("ponctia_user");
+
+
+// Vérification de la connexion
+if (!userData) {
+
+    alert("Tu dois être connecté pour accéder à ton historique.");
+
+    window.location.href = "login.html";
+
+} else {
+
+    const user = JSON.parse(userData);
+
+    const tableBody =
+        document.getElementById("latenessTableBody");
+
+    const historyMessage =
+        document.getElementById("historyMessage");
+
+    const historyCount =
+        document.getElementById("historyCount");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    let allLatenesses = [];
+
+
+    // =====================================================
+    // CHARGER L'HISTORIQUE
+    // =====================================================
+
+    async function loadHistory() {
+
+        historyMessage.textContent =
+            "Chargement de ton historique...";
+
+        try {
+
+            const url =
+                API_URL +
+                "/latenesses/student/" +
+                user.id;
+
+            console.log("Connexion à :", url);
+
+            const response =
+                await fetch(url);
+
+            console.log(
+                "Statut du serveur :",
+                response.status
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Erreur HTTP : " +
+                    response.status
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+            console.log(
+                "Réponse Ponctia :",
+                data
+            );
+
+
+            if (!data.success) {
+
+                historyMessage.textContent =
+                    data.message ||
+                    "Impossible de récupérer l'historique.";
+
+                historyMessage.className =
+                    "error-message";
+
+                return;
+
+            }
+
+
+            allLatenesses =
+                Array.isArray(data.latenesses)
+                    ? data.latenesses
+                    : [];
+
+
+            renderHistory(allLatenesses);
+
+
+        } catch (error) {
+
+            console.error(
+                "Erreur de connexion :",
+                error
+            );
+
+
+            historyMessage.textContent =
+                "Impossible de contacter le serveur.";
+
+            historyMessage.className =
+                "error-message";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // AFFICHER L'HISTORIQUE
+    // =====================================================
+
+    function renderHistory(latenesses) {
+
+        tableBody.innerHTML = "";
+
+        historyMessage.textContent = "";
+
+        historyCount.textContent =
+            latenesses.length +
+            " retard" +
+            (latenesses.length > 1 ? "s" : "");
+
+
+        if (latenesses.length === 0) {
+
+            tableBody.innerHTML = `
+
+                <tr>
+
+                    <td colspan="8">
+
+                        <div class="empty-history">
+
+                            <div class="empty-history-icon">
+                                📋
+                            </div>
+
+                            <h3>
+                                Aucun retard trouvé
+                            </h3>
+
+                            <p>
+                                Tes déclarations apparaîtront ici.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        latenesses.forEach(function(lateness) {
+
+            const row =
+                document.createElement("tr");
+
+
+            const courseName =
+                lateness.course_name ||
+                "Cours non renseigné";
+
+
+            const teacherName =
+                getTeacherName(lateness);
+
+
+            const statusText =
+                formatStatus(lateness.status);
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${formatDate(
+                        lateness.lateness_date
+                    )}
+                </td>
+
+                <td>
+                    ${courseName}
+                </td>
+
+                <td>
+                    ${teacherName}
+                </td>
+
+                <td>
+                    ${formatTime(
+                        lateness.arrival_time
+                    )}
+                </td>
+
+                <td>
+                    ${lateness.duration_minutes} min
+                </td>
+
+                <td>
+                    ${lateness.reason}
+                </td>
+
+                <td>
+
+                    <span
+                        class="status-badge ${lateness.status}"
+                    >
+                        ${statusText}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="detail-button"
+                        onclick="showDetails(${lateness.id})"
+                    >
+                        Voir
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(row);
+
+        });
+
+    }
+
+
+    // =====================================================
+    // ENSEIGNANT
+    // =====================================================
+
+    function getTeacherName(lateness) {
+
+        if (
+            lateness.teacher_first_name &&
+            lateness.teacher_last_name
+        ) {
+
+            return (
+                lateness.teacher_first_name +
+                " " +
+                lateness.teacher_last_name
+            );
+
+        }
+
+        return "Non renseigné";
+
+    }
+
+
+    // =====================================================
+    // FILTRE
+    // =====================================================
+
+    statusFilter.addEventListener(
+        "change",
+        function() {
+
+            const selectedStatus =
+                statusFilter.value;
+
+
+            if (selectedStatus === "all") {
+
+                renderHistory(allLatenesses);
+
+                return;
+
+            }
+
+
+            const filtered =
+                allLatenesses.filter(
+                    function(lateness) {
+
+                        return (
+                            lateness.status ===
+                            selectedStatus
+                        );
+
+                    }
+                );
+
+
+            renderHistory(filtered);
+
+        }
+    );
+
+
+    // =====================================================
+    // DATE
+    // =====================================================
+
+    function formatDate(date) {
+
+        if (!date) {
+            return "-";
+        }
+
+
+        const parts =
+            date.split("-");
+
+
+        if (parts.length !== 3) {
+            return date;
+        }
+
+
+        return (
+            parts[2] +
+            "/" +
+            parts[1] +
+            "/" +
+            parts[0]
+        );
+
+    }
+
+
+    // =====================================================
+    // HEURE
+    // =====================================================
+
+    function formatTime(time) {
+
+        if (!time) {
+            return "-";
+        }
+
+
+        return time.substring(0, 5);
+
+    }
+
+
+    // =====================================================
+    // STATUT
+    // =====================================================
+
+    function formatStatus(status) {
+
+        if (status === "pending") {
+            return "En attente";
+        }
+
+        if (status === "justified") {
+            return "Justifié";
+        }
+
+        if (status === "rejected") {
+            return "Refusé";
+        }
+
+        return status;
+
+    }
+
+
+    // =====================================================
+    // DÉTAILS
+    // =====================================================
+
+    function showDetails(id) {
+
+        const lateness =
+            allLatenesses.find(
+                function(item) {
+                    return item.id === id;
+                }
+            );
+
+
+        if (!lateness) {
+            return;
+        }
+
+
+        const course =
+            lateness.course_name ||
+            "Non renseigné";
+
+
+        const teacher =
+            getTeacherName(lateness);
+
+
+        const comment =
+            lateness.comment ||
+            "Aucun commentaire";
+
+
+        alert(
+
+            "Détails du retard\n\n" +
+
+            "Date : " +
+            formatDate(
+                lateness.lateness_date
+            ) +
+
+            "\nHeure : " +
+            formatTime(
+                lateness.arrival_time
+            ) +
+
+            "\nCours : " +
+            course +
+
+            "\nEnseignant : " +
+            teacher +
+
+            "\nDurée : " +
+            lateness.duration_minutes +
+            " minutes" +
+
+            "\nMotif : " +
+            lateness.reason +
+
+            "\nStatut : " +
+            formatStatus(
+                lateness.status
+            ) +
+
+            "\n\nCommentaire :\n" +
+            comment
+
+        );
+
+    }
+
+
+    // =====================================================
+    // DÉCONNEXION
+    // =====================================================
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    logoutButton.addEventListener(
+        "click",
+        function() {
+
+            localStorage.removeItem(
+                "ponctia_user"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+    // =====================================================
+    // DÉMARRAGE
+    // =====================================================
+
+    loadHistory();
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | Ponctia</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BARRE DE NAVIGATION
+    ====================================================== -->
+
+    <header class="dashboard-header">
+
+        <div class="logo">
+            Ponctia
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <a href="lateness.html">
+                Déclarer un retard
+            </a>
+
+            <a href="history.html">
+                Historique
+            </a>
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                Déconnexion
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENU PRINCIPAL
+    ====================================================== -->
+
+    <main class="dashboard-container">
+
+
+        <!-- MESSAGE DE BIENVENUE -->
+
+        <section class="welcome-section">
+
+            <div>
+
+                <p class="welcome-label">
+                    TABLEAU DE BORD
+                </p>
+
+                <h1>
+                    Bonjour <span id="studentName">Étudiant</span> 👋
+                </h1>
+
+                <p>
+                    Bienvenue sur ton espace Ponctia.
+                    Gère facilement tes retards et consulte ton historique.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARTES STATISTIQUES
+        ================================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- TOTAL -->
+
+            <article class="stat-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <div>
+
+                    <p>
+                        Total des retards
+                    </p>
+
+                    <h2 id="totalLateness">
+                        0
+                    </h2>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- EN ATTENTE -->
+
+            <article class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <p>
+                        En attente
+                    </p>
+
+                    <h2 id="pendingLateness">
+                        0
+                    </h2>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- JUSTIFIÉS -->
+
+            <article class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <p>
+                        Justifiés
+                    </p>
+
+                    <h2 id="justifiedLateness">
+                        0
+                    </h2>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- REFUSÉS -->
+
+            <article class="stat-card">
+
+                <div class="stat-icon">
+                    ❌
+                </div>
+
+                <div>
+
+                    <p>
+                        Refusés
+                    </p>
+
+                    <h2 id="rejectedLateness">
+                        0
+                    </h2>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACTIONS RAPIDES
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="section-label">
+                        ACTIONS RAPIDES
+                    </p>
+
+                    <h2>
+                        Que veux-tu faire ?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions-grid">
+
+
+                <a
+                    href="lateness.html"
+                    class="action-card"
+                >
+
+                    <div class="action-icon">
+                        +
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Déclarer un retard
+                        </h3>
+
+                        <p>
+                            Enregistrer un nouveau retard
+                            avec sa date, son motif et sa durée.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="history.html"
+                    class="action-card"
+                >
+
+                    <div class="action-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Voir mon historique
+                        </h3>
+
+                        <p>
+                            Consulte tous tes retards
+                            et leur statut.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INFORMATIONS DU COMPTE
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="section-label">
+                        MON COMPTE
+                    </p>
+
+                    <h2>
+                        Mes informations
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-card">
+
+
+                <div class="profile-item">
+
+                    <span>
+                        Prénom
+                    </span>
+
+                    <strong id="profileFirstName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>
+                        Nom
+                    </span>
+
+                    <strong id="profileLastName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>
+                        Adresse e-mail
+                    </span>
+
+                    <strong id="profileEmail">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>
+                        Rôle
+                    </span>
+
+                    <strong id="profileRole">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

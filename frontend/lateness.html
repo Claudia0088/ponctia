@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Déclarer un retard | Ponctia</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="dashboard-header">
+
+    <div class="logo">
+        Ponctia
+    </div>
+
+
+    <nav>
+
+        <a href="dashboard.html">
+            Tableau de bord
+        </a>
+
+        <a href="lateness.html">
+            Déclarer un retard
+        </a>
+
+        <a href="history.html">
+            Historique
+        </a>
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+        >
+            Déconnexion
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<main class="dashboard-container">
+
+
+    <section class="dashboard-section">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <p class="section-label">
+                    NOUVELLE DÉCLARATION
+                </p>
+
+                <h1>
+                    Déclarer un retard
+                </h1>
+
+                <p>
+                    Enregistre ton retard en quelques secondes.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <form id="latenessForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="latenessDate">
+                        Date du retard
+                    </label>
+
+                    <input
+                        type="date"
+                        id="latenessDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="arrivalTime">
+                        Heure d'arrivée
+                    </label>
+
+                    <input
+                        type="time"
+                        id="arrivalTime"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="duration">
+                        Durée du retard
+                    </label>
+
+                    <input
+                        type="number"
+                        id="duration"
+                        min="1"
+                        placeholder="Ex : 15"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="course">
+                        Cours
+                    </label>
+
+                    <select
+                        id="course"
+                        required
+                    >
+
+                        <option value="">
+                            Chargement des cours...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="reason">
+                        Motif
+                    </label>
+
+                    <select
+                        id="reason"
+                        required
+                    >
+
+                        <option value="">
+                            Sélectionner un motif
+                        </option>
+
+                        <option value="Transport">
+                            Transport
+                        </option>
+
+                        <option value="Probleme personnel">
+                            Problème personnel
+                        </option>
+
+                        <option value="Probleme de sante">
+                            Problème de santé
+                        </option>
+
+                        <option value="Autre">
+                            Autre
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="comment">
+                    Commentaire
+                </label>
+
+                <textarea
+                    id="comment"
+                    rows="5"
+                    placeholder="Ajoute une précision si nécessaire..."
+                ></textarea>
+
+            </div>
+
+
+
+            <p id="latenessMessage"></p>
+
+
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+                Déclarer mon retard
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script src="js/lateness.js"></script>
+
+</body>
+
+</html>
